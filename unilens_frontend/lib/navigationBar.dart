@@ -13,10 +13,10 @@ class _MyAppState extends State<MyApp> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = [
-    HomeScreen(),
-    CommunityScreen(),
-    InfoScreen(),
-    ProfileScreen(),
+    const HomeScreen(),
+    const CommunityScreen(),
+    const InfoScreen(),
+    const ProfileScreen(),
   ];
 
   @override
@@ -43,33 +43,39 @@ class _MyAppState extends State<MyApp> {
         body: _screens[_selectedIndex],
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedIndex,
+          type: BottomNavigationBarType
+              .fixed, // Ensures labels appear under icons
           onTap: (index) {
             setState(() {
               _selectedIndex = index;
             });
           },
-          items: [
+          items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home,
-                  color: _selectedIndex == 0 ? Colors.red : Colors.grey),
+              icon: Icon(Icons.home),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.people,
-                  color: _selectedIndex == 1 ? Colors.red : Colors.grey),
+              icon: Icon(Icons.people),
               label: 'Community',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.info,
-                  color: _selectedIndex == 2 ? Colors.red : Colors.grey),
+              icon: Icon(Icons.info),
               label: 'Info',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person,
-                  color: _selectedIndex == 3 ? Colors.red : Colors.grey),
+              icon: Icon(Icons.person),
               label: 'Profile',
             ),
           ],
+          selectedItemColor:
+              Colors.red, // Sets color for selected icon and label
+          unselectedItemColor:
+              Colors.grey, // Sets color for unselected icon and label
+          selectedLabelStyle: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+          unselectedLabelStyle: const TextStyle(),
         ),
       ),
     );
