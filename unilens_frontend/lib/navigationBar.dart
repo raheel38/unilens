@@ -13,10 +13,10 @@ class _MyAppState extends State<MyApp> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = [
-    const HomeScreen(),
-    const CommunityScreen(),
-    const InfoScreen(),
-    const ProfileScreen(),
+    HomeScreen(),
+    CommunityScreen(),
+    InfoScreen(),
+    ProfileScreen(),
   ];
 
   @override
