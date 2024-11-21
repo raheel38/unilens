@@ -3,8 +3,6 @@ import 'package:unilens/screens/info_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/community.dart';
 import 'screens/profile_screen.dart';
-//import 'screens/profile_screen.dart';
-//import 'screens/settings_screen.dart';
 
 class MyApp extends StatefulWidget {
   @override
@@ -26,18 +24,34 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         body: _screens[_selectedIndex],
-        bottomNavigationBar: NavigationBar(
-          selectedIndex: _selectedIndex,
-          onDestinationSelected: (index) {
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          onTap: (index) {
             setState(() {
               _selectedIndex = index;
             });
           },
-          destinations: const [
-            NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-            NavigationDestination(icon: Icon(Icons.people), label: 'Community'),
-            NavigationDestination(icon: Icon(Icons.info), label: 'Info'),
-            NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home,
+                  color: _selectedIndex == 0 ? Colors.red : Colors.grey),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.people,
+                  color: _selectedIndex == 1 ? Colors.red : Colors.grey),
+              label: 'Community',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.info,
+                  color: _selectedIndex == 2 ? Colors.red : Colors.grey),
+              label: 'Info',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person,
+                  color: _selectedIndex == 3 ? Colors.red : Colors.grey),
+              label: 'Profile',
+            ),
           ],
         ),
       ),
