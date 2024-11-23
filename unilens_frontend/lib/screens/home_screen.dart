@@ -102,3 +102,41 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+//learn to put the arrow in the right bottom of the homepage 
+//navigating to the community page 
+
+//                   Expanded(
+//                     child: Center(
+//                       child: Column(
+//                         mainAxisAlignment: MainAxisAlignment.center,
+//                         crossAxisAlignment: CrossAxisAlignment.center,
+//                         children: [],
+//                       ),
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ),
+//           Positioned(
+//             right: 20,
+//             bottom: 20,
+//             child: FloatingActionButton(
+//               onPressed: () {
+//                 // Navigate to the next page
+//                 Navigator.push(
+//                   context,
+//                   MaterialPageRoute(builder: (context) => CommunityScreen()),
+//                 );
+//               },
+//               child: Icon(Icons.arrow_forward, color: Colors.white),
+//               backgroundColor: Colors.transparent,
+//               elevation: 0,
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
