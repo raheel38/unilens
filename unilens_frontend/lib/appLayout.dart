@@ -15,8 +15,8 @@ class _MyAppState extends State<MyApp> {
   final List<Widget> _screens = [
     HomeScreen(),
     CommunityScreen(),
-    LoginScreen(),
-    SignupScreen(),
+    InfoScreen(),
+    ProfileScreen(),
   ];
 
   @override

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unilens/appLayout.dart';
 
 class CommunityScreen extends StatefulWidget {
   const CommunityScreen({super.key});
