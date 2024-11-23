@@ -5,7 +5,18 @@ class InfoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Scaffold(
+      body: Center(
+        child: Text(
+          'Info Screen',
+          style: TextStyle(
+            fontSize: 24, // Adjust font size as needed
+            fontWeight: FontWeight.bold, // Emphasize the text
+            color: Colors.black, // Default black color for text
+          ),
+        ),
+      ),
+    );
   }
 }
 

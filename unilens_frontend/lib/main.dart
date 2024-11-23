@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => MainLayout(), // Set MainLayout as the home screen
+        '/': (context) => MainLayout(),
         '/login': (context) => const LoginScreen(),
       },
     );
@@ -43,23 +43,37 @@ class _MainLayoutState extends State<MainLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: EdgeInsets.only(left: 16.0),
-            child: Text(
-              'UniLens',
-              style: TextStyle(
-                color: Colors.red,
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
+      appBar: _selectedIndex == 0
+          ? null
+          : AppBar(
+              flexibleSpace: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xFF2C2C54), // Dark Blue
+                      Color(0xFF450000), // Dark Red
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
               ),
+              title: Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: Text(
+                    'UniLens',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
+                  ),
+                ),
+              ),
+              elevation: 0,
             ),
-          ),
-        ),
-        elevation: 0,
-      ),
       body: IndexedStack(
         index: _selectedIndex,
         children: _screens,
