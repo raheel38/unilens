@@ -15,10 +15,10 @@ class _CommunityScreenState extends State<CommunityScreen> {
   final _contentController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  Color _postButtonColor = Colors.red;
+  Color _postButtonColor = const Color(0xFF2C2C54);
   Color _postTextColor = Colors.white;
   Color _cancelButtonColor = Colors.white;
-  Color _cancelTextColor = Colors.red;
+  Color _cancelTextColor = const Color(0xFF2C2C54);
 
   void _addPost() {
     if (_formKey.currentState!.validate()) {
@@ -168,7 +168,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                 ),
       floatingActionButton: FloatingActionButton(
         onPressed: _toggleAddPost,
-        backgroundColor: Colors.red,
+        backgroundColor: const Color(0xFF2C2C54),
         child: const Icon(Icons.add, color: Colors.white),
       ),
     );
