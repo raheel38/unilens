@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
-
+  LoginScreen({super.key});
+  //controller allow you to interact with the input fields programmatically,
+  //controller helps to retrieve  the text entered by the user or clearing the fields.
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
