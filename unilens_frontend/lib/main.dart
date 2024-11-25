@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => MainLayout(),
-        '/login': (context) => const LoginScreen(),
+        //'/': (context) => MainLayout(),
+        '/login': (context) => LoginScreen(),
       },
     );
   }
@@ -58,7 +58,7 @@ class _MainLayoutState extends State<MainLayout> {
                   ),
                 ),
               ),
-              title: Align(
+              title: const Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 16.0),

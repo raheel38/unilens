@@ -1,36 +1,26 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
-  //controller allow you to interact with the input fields programmatically,
-  //controller helps to retrieve  the text entered by the user or clearing the fields.
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  bool _isNotValidate = false;
 
-  @override
-  void initState() {
-    //super.initState(); //Do we need the super here thought we already entered
-    // Add listeners to controllers
-    emailController.addListener(_onEmailChanged);
-    passwordController.addListener(_onPasswordChanged);
-  }
-
-  void _onEmailChanged() {
-    // This function is called whenever the email text changes
-    print('Email: ${emailController.text}');
-  }
-
-  void _onPasswordChanged() {
-    // This function is called whenever the password text changes
-    print('Password: ${passwordController.text}');
-  }
-
-  @override
-  void dispose() {
-    // Dispose controllers when no longer needed
-    emailController.dispose();
-    passwordController.dispose();
-    //super.dispose();
+  // Login logic
+  void userLogin() {
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      print('Login successful!');
+    } else {
+      setState(() {
+        _isNotValidate = true;
+      });
+    }
   }
 
   @override
@@ -45,8 +35,10 @@ class LoginScreen extends StatelessWidget {
               // Email Input Field
               TextField(
                 controller: emailController, //controller of the email
+                keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   labelText: 'Email',
+                  errorText: _isNotValidate ? "Enter proper info" : null,
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey.shade400),
                   ),
@@ -56,17 +48,17 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              //controller on the email textfield
 
               const SizedBox(height: 16),
 
               // Password Input Field
               TextField(
-                //controller to edit the text later
                 controller: passwordController,
+                keyboardType: TextInputType.text,
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Password',
+                  errorText: _isNotValidate ? "Enter proper info" : null,
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey.shade400),
                   ),
@@ -90,10 +82,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  onPressed: () {
-                    // Login logic
-                    print('Login pressed');
-                  },
+                  onPressed: userLogin,
                   child: const Text(
                     'Login',
                     style: TextStyle(

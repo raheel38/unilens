@@ -1,7 +1,28 @@
 import 'package:flutter/material.dart';
 
-class SignupScreen extends StatelessWidget {
+class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
+
+  @override
+  _SignupScreenState createState() => _SignupScreenState();
+}
+
+class _SignupScreenState extends State<SignupScreen> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  bool _isNotValidate = false;
+
+  // Connecting to the backend
+  void userSignup() async {
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      // Call backend signup logic here
+      print('Valid input. Proceeding with signup...');
+    } else {
+      setState(() {
+        _isNotValidate = true;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +33,12 @@ class SignupScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Email Input Field
               TextField(
+                controller: emailController,
+                keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   labelText: 'Email',
+                  errorText: _isNotValidate ? "Enter proper info" : null,
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey.shade400),
                   ),
@@ -25,14 +48,14 @@ class SignupScreen extends StatelessWidget {
                   ),
                 ),
               ),
-
               const SizedBox(height: 16),
-
-              // Password Input Field
               TextField(
+                controller: passwordController,
+                keyboardType: TextInputType.text,
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Password',
+                  errorText: _isNotValidate ? "Enter proper info" : null,
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey.shade400),
                   ),
@@ -42,59 +65,26 @@ class SignupScreen extends StatelessWidget {
                   ),
                 ),
               ),
-
               const SizedBox(height: 24),
-
-              // Sign Up Button - Full width, rounded, and using dark blue
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF2C2C54), // Dark Blue
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
+              GestureDetector(
+                onTap: userSignup,
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF2C2C54), // Dark Blue
+                    borderRadius: BorderRadius.circular(30),
                   ),
-                  onPressed: () {
-                    // Sign up logic
-                    print('Sign Up button pressed');
-                  },
-                  child: const Text(
-                    'Sign Up',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 16),
-
-              // Already have an account? Login Text
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Already have an account? ",
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      // Navigate to Login Page
-                      print('Login clicked');
-                    },
-                    child: const Text(
-                      'Login',
+                  child: const Center(
+                    child: Text(
+                      'Sign Up',
                       style: TextStyle(
-                        fontSize: 14,
-                        color: Color(0xFF2C2C54), // Dark Blue
-                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 16,
                       ),
                     ),
                   ),
-                ],
+                ),
               ),
             ],
           ),
