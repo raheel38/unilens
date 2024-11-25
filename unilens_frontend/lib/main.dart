@@ -16,14 +16,35 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      // Set LoginScreen as the default page
+      home: LoginScreen(),
+      // Named routes can still be used for navigation
       routes: {
-        //'/': (context) => MainLayout(),
         '/login': (context) => LoginScreen(),
       },
     );
   }
 }
+
+// void main() {
+//   runApp(const MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       initialRoute: '/',
+//       routes: {
+//         //'/': (context) => MainLayout(),
+//         '/login': (context) => LoginScreen(),
+//       },
+//     );
+//   }
+// }
 
 class MainLayout extends StatefulWidget {
   @override

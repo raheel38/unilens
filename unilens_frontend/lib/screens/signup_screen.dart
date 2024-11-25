@@ -1,4 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:unilens/config.dart';
+import 'package:unilens/screens/login_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -15,8 +19,27 @@ class _SignupScreenState extends State<SignupScreen> {
   // Connecting to the backend
   void userSignup() async {
     if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
-      // Call backend signup logic here
-      print('Valid input. Proceeding with signup...');
+      // Creating the request body to send to the backend
+      var signupBody = {
+        "email": emailController.text,
+        "password": passwordController.text
+      };
+
+      // Making a POST request to the backend
+      var response = await http.post(
+        Uri.parse(registration),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(signupBody),
+      );
+      var jsonResponse = jsonDecode(response.body);
+      // Printing the response
+      print(jsonResponse['status']);
+      if (jsonResponse['status']) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => LoginScreen()));
+      } else {
+        print("Something Went Wrong!");
+      }
     } else {
       setState(() {
         _isNotValidate = true;
@@ -27,6 +50,25 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF2C2C54), // Dark Blue
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.pop(context); // Navigate back to the LoginScreen
+          },
+        ),
+        title: const Text(
+          'Sign Up',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),

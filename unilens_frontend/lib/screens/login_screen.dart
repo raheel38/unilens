@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'signup_screen.dart'; // Import the sign-up screen file
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -34,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               // Email Input Field
               TextField(
-                controller: emailController, //controller of the email
+                controller: emailController,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   labelText: 'Email',
@@ -71,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 24),
 
-              // Login Button - Full width, rounded, and using dark blue
+              // Login Button
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -105,8 +106,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // Navigate to Sign Up Page
-                      print('Sign Up clicked');
+                      // Navigate to the Sign-Up Page
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignupScreen(),
+                        ),
+                      );
                     },
                     child: const Text(
                       'Sign up',
