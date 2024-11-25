@@ -9,7 +9,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   void initState() {
-    //super.initState(); Do we need the super here thought we already entered
+    //super.initState(); //Do we need the super here thought we already entered
     // Add listeners to controllers
     emailController.addListener(_onEmailChanged);
     passwordController.addListener(_onPasswordChanged);
@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
     // Dispose controllers when no longer needed
     emailController.dispose();
     passwordController.dispose();
-    //super.dispose(); same as above
+    //super.dispose();
   }
 
   @override
@@ -44,7 +44,7 @@ class LoginScreen extends StatelessWidget {
             children: [
               // Email Input Field
               TextField(
-                controller: emailController,
+                controller: emailController, //controller of the email
                 decoration: InputDecoration(
                   labelText: 'Email',
                   enabledBorder: UnderlineInputBorder(
@@ -92,7 +92,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   onPressed: () {
                     // Login logic
-                    print('Login button pressed');
+                    print('Login pressed');
                   },
                   child: const Text(
                     'Login',
