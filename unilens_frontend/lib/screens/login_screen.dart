@@ -6,6 +6,33 @@ class LoginScreen extends StatelessWidget {
   //controller helps to retrieve  the text entered by the user or clearing the fields.
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    //super.initState(); Do we need the super here thought we already entered
+    // Add listeners to controllers
+    emailController.addListener(_onEmailChanged);
+    passwordController.addListener(_onPasswordChanged);
+  }
+
+  void _onEmailChanged() {
+    // This function is called whenever the email text changes
+    print('Email: ${emailController.text}');
+  }
+
+  void _onPasswordChanged() {
+    // This function is called whenever the password text changes
+    print('Password: ${passwordController.text}');
+  }
+
+  @override
+  void dispose() {
+    // Dispose controllers when no longer needed
+    emailController.dispose();
+    passwordController.dispose();
+    //super.dispose(); same as above
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,6 +44,7 @@ class LoginScreen extends StatelessWidget {
             children: [
               // Email Input Field
               TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                   labelText: 'Email',
                   enabledBorder: UnderlineInputBorder(
@@ -28,11 +56,14 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              //controller on the email textfield
 
               const SizedBox(height: 16),
 
               // Password Input Field
               TextField(
+                //controller to edit the text later
+                controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Password',
