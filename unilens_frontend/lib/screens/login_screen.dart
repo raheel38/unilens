@@ -1,4 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:unilens/config.dart';
+import 'package:unilens/dashboard.dart';
+import 'package:unilens/screens/home_screen.dart';
 import 'signup_screen.dart'; // Import the sign-up screen file
 
 class LoginScreen extends StatefulWidget {
@@ -9,18 +16,46 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   bool _isNotValidate = false;
+  late SharedPreferences prefs;
 
-  // Login logic
-  void userLogin() {
+  @override
+  void initState() {
+    super.initState();
+    initSharedPref();
+  }
+
+  void initSharedPref() async {
+    prefs = await SharedPreferences.getInstance();
+  }
+
+  void loginUser() async {
     if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
-      print('Login successful!');
-    } else {
-      setState(() {
-        _isNotValidate = true;
-      });
+      var reqBody = {
+        "email": emailController.text,
+        "password": passwordController.text
+      };
+      // Making a POST request to the backend
+      var response = await http.post(
+        Uri.parse(login),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(reqBody),
+      );
+      var jsonResponse = jsonDecode(response.body);
+      if (jsonResponse['status']) {
+        var myToken = jsonResponse['token'];
+        prefs.setString('token', myToken);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Dashboard(
+                      token: myToken,
+                    )));
+      } else {
+        print('Something went wrong');
+      }
     }
   }
 
@@ -39,7 +74,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   labelText: 'Email',
-                  errorText: _isNotValidate ? "Enter proper info" : null,
+                  errorText:
+                      _isNotValidate ? "Enter proper email address" : null,
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey.shade400),
                   ),
@@ -59,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Password',
-                  errorText: _isNotValidate ? "Enter proper info" : null,
+                  errorText: _isNotValidate ? "Enter proper password" : null,
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey.shade400),
                   ),
@@ -71,29 +107,26 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
 
               const SizedBox(height: 24),
-
-              // Login Button
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF2C2C54), // Dark Blue
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
+              GestureDetector(
+                onTap: loginUser,
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF2C2C54), // Dark Blue
+                    borderRadius: BorderRadius.circular(30),
                   ),
-                  onPressed: userLogin,
-                  child: const Text(
-                    'Login',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
+                  child: const Center(
+                    child: Text(
+                      'Login',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ),
               ),
-
               const SizedBox(height: 16),
 
               // Sign Up Text with Link
