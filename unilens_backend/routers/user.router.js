@@ -5,4 +5,7 @@ const UserController = require('../controller/user.controller');
 router.post('/registration',UserController.register);
 // Create login API
 router.post('/login',UserController.login);
+//uncomment when working on scrapping
+//router.post('/results',UserController.results);
+
 module.exports = router;

@@ -46,3 +46,19 @@ exports.login = async(req,res,next)=>{
         
     }
 }
+// Web scrapping code 
+// Info page web scrapping
+// Made the API in router page 
+
+// app.get('/results', (req, res) => {
+//   const articles = [
+//     { url: 'https://example.com/article1', title: 'Article 1' },
+//     { url: 'https://example.com/article2', title: 'Article 2' },
+//     // Add more articles as needed
+//   ];
+//   res.json(articles);
+// });
+
+// app.listen(PORT, () => {
+//   console.log(`Server is running on http://localhost:${PORT}`);
+// });
