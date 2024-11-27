@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unilens/config.dart';
 import 'package:unilens/dashboard.dart';
-import 'package:unilens/screens/home_screen.dart';
 import 'signup_screen.dart'; // Import the sign-up screen file
 
 class LoginScreen extends StatefulWidget {

@@ -94,7 +94,7 @@ class _DashboardState extends State<Dashboard> {
             label: 'Profile',
           ),
         ],
-        selectedItemColor: Colors.red,
+        selectedItemColor: Color(0xFF2C2C54),
         unselectedItemColor: Colors.grey,
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
       ),
