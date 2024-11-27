@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 import 'screens/home_screen.dart';
 import 'screens/community.dart';
 import 'screens/info_screen.dart';
 import 'screens/profile_screen.dart';
 
 class Dashboard extends StatefulWidget {
-  final token;
-  const Dashboard({@required this.token, Key? key}) : super(key: key);
+  final String token;
+  const Dashboard({required this.token, Key? key}) : super(key: key);
 
   @override
   State<Dashboard> createState() => _DashboardState();
@@ -15,19 +14,17 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   int _selectedIndex = 0;
-  final List<Widget> _screens = [
-    HomeScreen(),
-    CommunityScreen(),
-    InfoScreen(),
-    ProfileScreen(),
-  ];
-  late String email;
+  late final List<Widget> _screens;
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    Map<String, dynamic> jwtDecodedToken = JwtDecoder.decode(widget.token);
-    email = jwtDecodedToken['email'];
+    _screens = [
+      HomeScreen(),
+      CommunityScreen(),
+      InfoScreen(),
+      ProfileScreen(token: widget.token),
+    ];
   }
 
   @override
@@ -51,7 +48,7 @@ class _DashboardState extends State<Dashboard> {
               title: const Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 16.0),
+                  padding: EdgeInsets.only(left: 16.0),
                   child: Text(
                     'UniLens',
                     style: TextStyle(
