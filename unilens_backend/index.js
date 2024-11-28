@@ -1,6 +1,7 @@
 const app = require('./app');
 const db = require('./config/db')
 const UserModel = require('./model/user.model')
+const PostModel = require('./model/post.model')
 //const scrapeUrl = 'https://isss.khu.ac.kr/globalcenter/user/bbs/BMSR00040/list.do?menuNo=7900065'
 // Make server 
 //const app = express()

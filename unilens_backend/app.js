@@ -2,6 +2,7 @@
 const express = require('express');
 const body_parser = require('body-parser');
 const userRouter = require('./routers/user.router')
+const postRouter = require('./routers/post.router')
 
 const app = express();
 
@@ -9,4 +10,5 @@ const app = express();
 app.use(body_parser.json());
 
 app.use('/',userRouter);
+app.use('/',postRouter);
 module.exports = app;
