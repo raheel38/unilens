@@ -17,3 +17,19 @@ exports.createPost = async (req,res,next) =>{
         
     }
 }
+exports.getUserPost = async (req,res,next) =>{
+    try {
+        const{userId} = req.body;
+
+        //send the request to the post services 
+        let post = await PostServices.getPostData(userId);
+
+        // response back to frontend 
+        res.json({status:true,success:post}) //success:post -> pass whatever data stored in database 
+
+        
+    } catch (error) {
+        next(error)
+        
+    }
+}

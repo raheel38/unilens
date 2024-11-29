@@ -8,5 +8,10 @@ class PostServices{
         return await createPost.save() //data will get stored in mongoDB 
 
     }
+    static async getPostData(userId){ // 3 parameters based on the post model schema 
+        const postData = await PostModel.find({userId})
+        return postData; //data will get stored in mongoDB 
+
+    }
 }
 module.exports = PostServices

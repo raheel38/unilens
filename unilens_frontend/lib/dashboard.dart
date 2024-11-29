@@ -3,6 +3,7 @@ import 'screens/home_screen.dart';
 import 'screens/community.dart';
 import 'screens/info_screen.dart';
 import 'screens/profile_screen.dart';
+import 'screens/com.dart';
 
 class Dashboard extends StatefulWidget {
   final String token;
@@ -19,10 +20,11 @@ class _DashboardState extends State<Dashboard> {
   @override
   void initState() {
     super.initState();
+    // Ensure `widget.token` is passed to AddPost and ProfileScreen
     _screens = [
-      HomeScreen(),
-      CommunityScreen(),
-      InfoScreen(),
+      HomeScreen(), // Assuming HomeScreen doesn't need the token
+      AddPost(token: widget.token),
+      InfoScreen(), // Assuming InfoScreen doesn't need the token
       ProfileScreen(token: widget.token),
     ];
   }
