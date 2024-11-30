@@ -13,5 +13,10 @@ class PostServices{
         return postData; //data will get stored in mongoDB 
 
     }
+    static async deletePost(id){ // 3 parameters based on the post model schema 
+        const deleted = await PostModel.findOneAndDelete({_id:id})
+        return deleted; //data will get stored in mongoDB 
+
+    }
 }
 module.exports = PostServices

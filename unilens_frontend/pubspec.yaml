@@ -33,6 +33,7 @@ dependencies:
   http:
   shared_preferences:
   jwt_decoder:
+  flutter_slidable:
 
 
   # The following adds the Cupertino Icons font to your application.
